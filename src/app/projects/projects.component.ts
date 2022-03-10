@@ -28,6 +28,7 @@ export class ProjectsComponent implements OnInit {
   searchText: string = 'Search Text'
 
   @ViewChild("newProjectForm") newProjectForm: NgForm | any = null;
+  @ViewChild("editProjectForm") editProjectForm: NgForm | any = null;
 
   constructor(private service: ProjectsService, private clientLocationService: ClientLocationsService) { }
 
@@ -59,7 +60,9 @@ export class ProjectsComponent implements OnInit {
   onSave() {
     console.log("Validity Status: ", this.newProjectForm.valid)
     if (this.newProjectForm.valid) {
-      this.newProject.clientLocation = this.clientLocations.find(client => client.clientLocationID == this.newProject.clientLocationID);
+      this.newProject.clientLocation =
+        this.clientLocations.find(
+          (client) => client.clientLocationID == this.newProject.clientLocationID);
       this.service.createProject(this.newProject)
         .subscribe(
           (response) => {
@@ -84,17 +87,28 @@ export class ProjectsComponent implements OnInit {
   }
 
   onUpdate() {
-    this.service.updateProject(this.editProject)
-      .subscribe(
-        (response) => {
-          this.projects[this.editProjectIndex] = response;
+    if (this.editProjectForm.valid) {
+      this.editProject.clientLocation =
+        this.clientLocations.find(
+          (client) => client.clientLocationID == this.editProject.clientLocationID);
 
-          this.editProject = new Project();
-        },
-        (error) => {
-          console.log(error)
-        },
-      )
+      this.service.updateProject(this.editProject)
+        .subscribe(
+          (response) => {
+            this.projects[this.editProjectIndex] = response;
+
+            this.editProject = new Project();
+
+            // Jquery Call
+            $("#updateProjetCancel").trigger("click")
+
+          },
+          (error) => {
+            console.log(error)
+          },
+        )
+    }
+
   }
 
   onDeleteClicked(index: number) {
