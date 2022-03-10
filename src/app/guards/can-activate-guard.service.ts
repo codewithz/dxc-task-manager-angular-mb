@@ -3,13 +3,14 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { LoginService } from '../login/login.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CanActivateGuardService implements CanActivate {
 
-  constructor(private loginService: LoginService, private router: Router, private jwtHelperService: JwtHelperService) { }
+  constructor(private loginService: LoginService, private router: Router, private jwtHelperService: JwtHelperService, private toaster: ToastrService) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     console.log(this.router.url)
@@ -25,8 +26,13 @@ export class CanActivateGuardService implements CanActivate {
       return true; //User can navigate to the requested route
     }
     else {
+      this.showError('Unauthorized', 'You are not authorized to access this page')
       this.router.navigate(["/login"])
       return false; // User cannot navigate to the request route
     }
+  }
+
+  showError(title: string, message: string) {
+    this.toaster.error(title, message)
   }
 }
