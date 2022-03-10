@@ -468,13 +468,13 @@
               <span
                 class="text-danger"
                 *ngIf="
-                  newClientLocationID.invalid &&
-                  (newClientLocationID.dirty ||
-                    newClientLocationID.touched ||
+                  newProjectForm.invalid &&
+                  (newProjectForm.dirty ||
+                    newProjectForm.touched ||
                     newProjectForm.submitted) &&
                   newProjectForm.errors?.clientLocationStatus
                 "
-                >Please Select the Client Location</span
+                >New Jersey cannot have Support Job</span
               >
             </div>
           </div>
@@ -861,9 +861,9 @@
               <span
                 class="text-danger"
                 *ngIf="
-                  editClientLocationID.invalid &&
-                  (editClientLocationID.dirty ||
-                    editClientLocationID.touched ||
+                  editProjectForm.invalid &&
+                  (editProjectForm.dirty ||
+                    editProjectForm.touched ||
                     editProjectForm.submitted) &&
                   editProjectForm.errors?.clientLocationStatus
                 "
