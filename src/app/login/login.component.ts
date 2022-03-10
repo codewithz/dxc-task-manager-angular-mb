@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from './login';
 import { LoginService } from './login.service';
+import { AlertServiceService } from './../notifications/alert-service.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   errorMessage: string = ''
 
-  constructor(private service: LoginService, private router: Router) { }
+  constructor(private service: LoginService, private router: Router, private alertService: AlertServiceService) { }
 
   ngOnInit(): void {
     this.login.UserName = 'admin';
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           console.log(error)
-          this.errorMessage = 'Invalid Username or Password';
+          //this.errorMessage = 'Invalid Username or Password'       
+          this.alertService.showError('Access Denied', 'Invalid username or password')
         }
       )
   }
