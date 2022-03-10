@@ -456,16 +456,14 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn logo-color btn-sm" data-dismiss="modal">
-            Cancel
-          </button>
           <button
             class="btn logo-color btn-sm"
             data-dismiss="modal"
-            (click)="onSave()"
+            id="newProjectCancel"
           >
-            Save
+            Cancel
           </button>
+          <button class="btn logo-color btn-sm" (click)="onSave()">Save</button>
         </div>
       </div>
     </div>

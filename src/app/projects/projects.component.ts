@@ -4,6 +4,7 @@ import { ProjectsService } from './projects.service';
 import { ClientLocation } from './../client-location/client-location';
 import { ClientLocationsService } from '../client-location/client-locations.service';
 import { NgForm } from '@angular/forms';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-projects',
@@ -56,22 +57,24 @@ export class ProjectsComponent implements OnInit {
   }
 
   onSave() {
-    this.service.createProject(this.newProject)
-      .subscribe(
-        (response) => {
-          //Adding new project to the table
-          let createdProject: Project = response;
-          this.projects.push(createdProject)
+    console.log("Validity Status: ", this.newProjectForm.valid)
+    if (this.newProjectForm.valid) {
+      this.newProject.clientLocation = this.clientLocations.find(client => client.clientLocationID == this.newProject.clientLocationID);
+      this.service.createProject(this.newProject)
+        .subscribe(
+          (response) => {
+            //Adding new project to the table
+            let createdProject: Project = response;
+            this.projects.push(createdProject)
 
-          //Clearing the field
-          this.newProject.projectID = 0;
-          this.newProject.projectName = null;
-          this.newProject.dateOfStart = null;
-          this.newProject.teamSize = 0;
-
-        },
-        (error) => { console.log(error) }
-      )
+            //Clearing the field
+            this.newProject = new Project();
+            // Jquery Call
+            $("#newProjectCancel").trigger("click")
+          },
+          (error) => { console.log(error) }
+        )
+    }
   }
 
   onEditClicked(event: any, index: number) {
