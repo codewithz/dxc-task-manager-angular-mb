@@ -129,6 +129,7 @@
               <input
                 #newProjectId="ngModel"
                 id="projectId"
+                appProjectIdUniqueValidator
                 type="number"
                 style="width: 100px"
                 class="form-control"
@@ -171,6 +172,17 @@
                   newProjectId.errors?.pattern
                 "
                 >Project ID should only contain numbers</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="
+                  newProjectId.invalid &&
+                  (newProjectId.dirty ||
+                    newProjectId.touched ||
+                    newProjectForm.submitted) &&
+                  newProjectId.errors?.uniqueProjectId
+                "
+                >Project ID already exists</span
               >
             </div>
           </div>
@@ -565,6 +577,17 @@
                 "
                 >Project ID should only contain numbers</span
               >
+              <span
+                class="text-danger"
+                *ngIf="
+                  editProjectId.invalid &&
+                  (editProjectId.dirty ||
+                    editProjectId.touched ||
+                    editProjectForm.submitted) &&
+                  editProjectId.errors?.uniqueProjectId
+                "
+                >Project ID already exists</span
+              >
             </div>
           </div>
           <!-- Project ID ends here  -->
@@ -577,6 +600,7 @@
             <div class="col-sm-8">
               <input
                 #editProjectName="ngModel"
+                appProjectIdUniqueValidator
                 id="projectName"
                 type="text"
                 style="width: 200px"

@@ -53,4 +53,9 @@ export class ProjectsService {
 
     return this.http.get<Project[]>(`${this.url}/search/${searchBy}/${searchText}`);
   }
+
+  getProjectByProjectId(projectId: number): Observable<Project> {
+    return this.http.get<Project>(`${this.url}/searchbyprojectid/${projectId}`);
+  }
+
 }

@@ -15,6 +15,7 @@ import { JwtinterceptorService } from './interceptors/jwtinterceptor.service';
 import { JwtUnauthorizedInterceptorService } from './interceptors/jwt-unauthorized-interceptor.service';
 import { TeamSizeValidatorDirective } from './directives/team-size-validator.directive';
 import { ClientLocationStatusValidatorDirective } from './directives/client-location-status-validator.directive';
+import { ProjectIdUniqueValidatorDirective } from './directives/project-id-unique-validator.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ClientLocationStatusValidatorDirective } from './directives/client-loca
     ProjectsComponent,
     LoginComponent,
     TeamSizeValidatorDirective,
-    ClientLocationStatusValidatorDirective
+    ClientLocationStatusValidatorDirective,
+    ProjectIdUniqueValidatorDirective
   ],
   imports: [
 
