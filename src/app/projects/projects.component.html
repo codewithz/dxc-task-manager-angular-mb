@@ -300,6 +300,7 @@
                 type="number"
                 style="width: 200px"
                 class="form-control"
+                appTeamSizeValidator
                 placeholder="Team Size"
                 name="teamSize"
                 [(ngModel)]="newProject.teamSize"
@@ -329,6 +330,17 @@
                   newTeamSize.errors?.required
                 "
                 >Team Size cannot be blank</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="
+                  newTeamSize.invalid &&
+                  (newTeamSize.dirty ||
+                    newTeamSize.touched ||
+                    newProjectForm.submitted) &&
+                  newTeamSize.errors?.divisible
+                "
+                >Team Size should be in multiple of 5</span
               >
             </div>
           </div>
@@ -667,6 +679,7 @@
                 style="width: 200px"
                 class="form-control"
                 placeholder="Team Size"
+                appTeamSizeValidator
                 name="teamSize"
                 [(ngModel)]="editProject.teamSize"
                 pattern="^[0-9]*$"
@@ -685,6 +698,17 @@
                       editProjectForm.submitted)
                 }"
               />
+              <span
+                class="text-danger"
+                *ngIf="
+                  editTeamSize.invalid &&
+                  (editTeamSize.dirty ||
+                    editTeamSize.touched ||
+                    editProjectForm.submitted) &&
+                  editTeamSize.errors?.required
+                "
+                >Team Size cannot be blank</span
+              >
               <span
                 class="text-danger"
                 *ngIf="
@@ -822,14 +846,14 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn logo-color btn-sm" data-dismiss="modal" id="updateProjetCancel">
+          <button
+            class="btn logo-color btn-sm"
+            data-dismiss="modal"
+            id="updateProjetCancel"
+          >
             Cancel
           </button>
-          <button
-            class="btn btn-warning btn-sm"
-        
-            (click)="onUpdate()"
-          >
+          <button class="btn btn-warning btn-sm" (click)="onUpdate()">
             Update
           </button>
         </div>

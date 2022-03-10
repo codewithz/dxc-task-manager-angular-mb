@@ -13,6 +13,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { LoginComponent } from './login/login.component';
 import { JwtinterceptorService } from './interceptors/jwtinterceptor.service';
 import { JwtUnauthorizedInterceptorService } from './interceptors/jwt-unauthorized-interceptor.service';
+import { TeamSizeValidatorDirective } from './directives/team-size-validator.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { JwtUnauthorizedInterceptorService } from './interceptors/jwt-unauthoriz
     AboutComponent,
     NotFoundComponent,
     ProjectsComponent,
-    LoginComponent
+    LoginComponent,
+    TeamSizeValidatorDirective
   ],
   imports: [
 
