@@ -5,6 +5,7 @@ import { ClientLocation } from './../client-location/client-location';
 import { ClientLocationsService } from '../client-location/client-locations.service';
 import { NgForm } from '@angular/forms';
 import * as $ from 'jquery';
+import { TeamSizeService } from './team-size.service';
 
 @Component({
   selector: 'app-projects',

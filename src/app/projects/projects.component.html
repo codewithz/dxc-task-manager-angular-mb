@@ -104,7 +104,11 @@
 </div>
 
 <!-- Create Project Modal -->
-<form #newProjectForm="ngForm" novalidate="novalidate">
+<form
+  #newProjectForm="ngForm"
+  novalidate="novalidate"
+  appClientLocationStatusValidator
+>
   <div class="modal" role="dialog" id="projectModal">
     <div class="modal-dialog">
       <div class="modal-content" style="width: 700px">
@@ -300,7 +304,6 @@
                 type="number"
                 style="width: 200px"
                 class="form-control"
-                appTeamSizeValidator
                 placeholder="Team Size"
                 name="teamSize"
                 [(ngModel)]="newProject.teamSize"
@@ -462,6 +465,17 @@
                 "
                 >Please Select the Client Location</span
               >
+              <span
+                class="text-danger"
+                *ngIf="
+                  newClientLocationID.invalid &&
+                  (newClientLocationID.dirty ||
+                    newClientLocationID.touched ||
+                    newProjectForm.submitted) &&
+                  newProjectForm.errors?.clientLocationStatus
+                "
+                >Please Select the Client Location</span
+              >
             </div>
           </div>
           <!-- Client Location ends here  -->
@@ -483,7 +497,11 @@
 </form>
 
 <!-- Edit Project Modal -->
-<form #editProjectForm="ngForm" novalidate="novalidate">
+<form
+  #editProjectForm="ngForm"
+  novalidate="novalidate"
+  appClientLocationStatusValidator
+>
   <div class="modal" role="dialog" id="editProjectModal">
     <div class="modal-dialog">
       <div class="modal-content" style="width: 700px">
@@ -839,6 +857,17 @@
                   editClientLocationID.errors?.required
                 "
                 >Please Select the Client Location</span
+              >
+              <span
+                class="text-danger"
+                *ngIf="
+                  editClientLocationID.invalid &&
+                  (editClientLocationID.dirty ||
+                    editClientLocationID.touched ||
+                    editProjectForm.submitted) &&
+                  editProjectForm.errors?.clientLocationStatus
+                "
+                >New Jersey cannot have Support Job</span
               >
             </div>
           </div>

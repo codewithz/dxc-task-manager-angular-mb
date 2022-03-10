@@ -1,5 +1,8 @@
-import { Directive } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
+import { Directive, Input } from '@angular/core';
+import {
+  AbstractControl, NG_VALIDATORS,
+  ValidationErrors, Validator
+} from '@angular/forms';
 
 @Directive({
   selector: '[appTeamSizeValidator]',
@@ -10,6 +13,8 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
   }]
 })
 export class TeamSizeValidatorDirective implements Validator {
+
+
 
   constructor() { }
 
