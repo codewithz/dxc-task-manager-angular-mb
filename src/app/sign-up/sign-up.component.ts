@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from '../countries/country';
 import { CountriesService } from './../countries/countries.service';
 
@@ -31,14 +31,14 @@ export class SignUpComponent implements OnInit {
 
     this.signUpForm = new FormGroup({
       personalDetails: new FormGroup({
-        firstName: new FormControl(null),
-        lastName: new FormControl(null),
+        firstName: new FormControl(null, [Validators.required, Validators.minLength(2)]),
+        lastName: new FormControl(null, [Validators.required, Validators.minLength(2)]),
       }),
-      email: new FormControl(null),
-      mobile: new FormControl(null),
-      dateOfBirth: new FormControl(null),
-      gender: new FormControl(null),
-      countryID: new FormControl(null),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      mobile: new FormControl(null, [Validators.required, Validators.pattern(/^[789]\d{9}$/)]),
+      dateOfBirth: new FormControl(null, [Validators.required]),
+      gender: new FormControl(null, [Validators.required]),
+      countryID: new FormControl(null, [Validators.required]),
       receiveNewsLetter: new FormControl(null),
       skills: new FormArray([])
     })
@@ -88,8 +88,8 @@ export class SignUpComponent implements OnInit {
 
   onAddSkill() {
     let skillFormGroup = new FormGroup({
-      skillName: new FormControl(null),
-      level: new FormControl(null),
+      skillName: new FormControl(null, [Validators.required]),
+      level: new FormControl(null, [Validators.required]),
     })
 
     let skillsFormArray =
