@@ -46,4 +46,36 @@ export class SignUpComponent implements OnInit {
       })
   }
 
+  onSubmitClicked() {
+    //Set Value
+    // this.signUpForm.setValue(
+    //   {
+
+    //     firstName: 'Zartab',
+    //     lastName: 'Nakhwa',
+    //     email: 'zartab@codewithz.com',
+    //     mobile: 'Some Number',
+    //     dateOfBirth: '1990-12-13',
+    //     gender: 'male',
+    //     countryID: 300,
+    //     receiveNewsLetter: true
+    //   }
+    // )
+
+    // Patch Value 
+    // this.signUpForm.patchValue(
+    //   {
+
+    //     firstName: 'Zartab',
+    //     lastName: 'Nakhwa',
+    //     email: 'zartab@codewithz.com',
+    //     mobile: 'Some Number',
+
+    //   }
+    // )
+
+    //Reset 
+    this.signUpForm.reset();
+  }
+
 }
