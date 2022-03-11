@@ -153,6 +153,53 @@
             </div>
           </div>
           <!-- newsletter ends here -->
+          <!-- Skills starts here -->
+          <div class="form-group form-row">
+            <label for="skills" class="col-md-4 col-form-label">
+              Skills:
+            </label>
+            <div class="col-md-8" formArrayName="skills">
+              <div
+                *ngFor="
+                  let skill of signUpForm.get('skills').controls;
+                  index as i
+                "
+                [formGroupName]="i"
+              >
+                <div class="col-5 m-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="skillName"
+                    id="skillName"
+                    placeholder="Skill Name"
+                    formControlName="skillName"
+                  />
+                </div>
+                <div class="col-4 m-2">
+                  <select
+                    name="level"
+                    id="level"
+                    formControlName="level"
+                    class="form-control"
+                  >
+                    <option value="null">Please Select</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Professional">Professional</option>
+                    <option value="Expert">Expert</option>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <button class="btn btn-danger btn-sm" (click)="onRemoveCLick(i)">Remove</button>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-warning" (click)="onAddSkill()">
+              Add Skill
+            </button>
+          </div>
+          <!-- Skills ends here -->
         </form>
         {{ signUpForm.value | json }}
       </div>
