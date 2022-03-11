@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Country } from '../countries/country';
 import { CountriesService } from './../countries/countries.service';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -38,6 +39,11 @@ export class SignUpComponent implements OnInit {
       countryID: new FormControl(null),
       receiveNewsLetter: new FormControl(null)
     })
+
+    this.signUpForm.valueChanges.
+      subscribe((value: any) => {
+        console.log(value)
+      })
   }
 
 }
