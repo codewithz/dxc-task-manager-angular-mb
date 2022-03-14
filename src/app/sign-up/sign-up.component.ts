@@ -41,12 +41,16 @@ export class SignUpComponent implements OnInit {
       dateOfBirth: new FormControl(null,
         [Validators.required,
         this.customAgeValidator.minimumAgeValidator(18)]),
-      password: new FormControl(null),
-      confirmPassword: new FormControl(null),
+      password: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required]),
       gender: new FormControl(null, [Validators.required]),
       countryID: new FormControl(null, [Validators.required]),
       receiveNewsLetter: new FormControl(null),
       skills: new FormArray([])
+    }, {
+      validators: [
+        this.customAgeValidator.comparePasswordValidator("confirmPassword", "password")
+      ]
     })
 
     this.signUpForm.valueChanges.
