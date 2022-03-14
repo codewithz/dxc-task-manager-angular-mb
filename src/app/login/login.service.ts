@@ -14,7 +14,7 @@ export class LoginService {
   currentUser: any = null;
 
 
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
     private jwtHelperService: JwtHelperService) { }
 
   loginUser(login: Login): Observable<any> {
@@ -52,5 +52,9 @@ export class LoginService {
     else {
       return true; // Token is valid
     }
+  }
+
+  getUserByEmail(email: string): Observable<any> {
+    return this.http.get<any>('http://localhost:9090/api/getUserByEmail/' + email);
   }
 }

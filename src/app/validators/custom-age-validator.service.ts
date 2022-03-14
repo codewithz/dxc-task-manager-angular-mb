@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ValidatorFn, AbstractControl, ValidationErrors, FormGroup, FormControl } from '@angular/forms';
+import { ValidatorFn, AbstractControl, ValidationErrors, FormGroup, FormControl, AsyncValidatorFn } from '@angular/forms';
+import { LoginService } from './../login/login.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomAgeValidatorService {
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   minimumAgeValidator(minimumAge: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -46,5 +49,28 @@ export class CustomAgeValidatorService {
         return { comparePasswordValidator: { valid: false } }// Invalid
       }
     }
+  }
+
+  duplicateEmailValidator(): AsyncValidatorFn {
+
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this.loginService.getUserByEmail(control.value)
+        .pipe(
+          map(
+            (existingUser: any) => {
+              if (existingUser != null) {
+                control.setErrors({
+                  uniqueEmail: { valid: false }
+                });
+                return { uniqueEmail: { valid: false } }
+              }
+              else {
+                return null;
+              }
+            }
+          )
+        )
+    }
+
   }
 }
