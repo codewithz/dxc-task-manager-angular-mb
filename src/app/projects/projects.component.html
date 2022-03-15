@@ -58,12 +58,11 @@
 
   <div class="col-xl-12 mx-auto">
     <div class="row">
-      <div class="col-md-4" *ngFor="let project of projects; let i = index">
-        <app-project></app-project>
+      <div class="col-md-4" *ngFor="let project of projects; index as i">
+        <app-project [currentProject]="project"></app-project>
       </div>
     </div>
   </div>
-  
 </div>
 
 <!-- Create Project Modal -->
