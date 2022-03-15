@@ -7,6 +7,9 @@ import { NgForm } from '@angular/forms';
 import * as $ from 'jquery';
 import { TeamSizeService } from './team-size.service';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import { RootReducerState } from './../reducers/index';
+import { ProjectsListRequestedAction, ProjectsListSuccessAction } from './../actions/projects-action';
 
 @Component({
   selector: 'app-projects',
@@ -32,28 +35,41 @@ export class ProjectsComponent implements OnInit {
   @ViewChild("newProjectForm") newProjectForm: NgForm | any = null;
   @ViewChild("editProjectForm") editProjectForm: NgForm | any = null;
 
-  constructor(private service: ProjectsService, private clientLocationService: ClientLocationsService,
-    private toaster: ToastrService) { }
+  constructor(private service: ProjectsService,
+    private clientLocationService: ClientLocationsService,
+    private toaster: ToastrService,
+    private store: Store<RootReducerState>
+  ) { }
 
   ngOnInit(): void {
+
+    this.getProjectsData();
+    this.getClientLocationsData();
+
+  }
+
+  getProjectsData() {
+
+    this.store.dispatch(new ProjectsListRequestedAction());
 
     this.service.getProjects()
       .subscribe(
         (response) => {
           this.projects = response;
+          this.store.dispatch(new ProjectsListSuccessAction({ data: response }))
           console.log(this.projects)
           this.showLoading = false;
         }
       )
+  }
 
+  getClientLocationsData() {
     this.clientLocationService.getClientLocations()
       .subscribe(
         (response) => {
           this.clientLocations = response
         }
       )
-
-
   }
 
   onCreateProjectClicked() {
