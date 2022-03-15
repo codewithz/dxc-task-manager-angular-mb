@@ -8,8 +8,10 @@ import * as $ from 'jquery';
 import { TeamSizeService } from './team-size.service';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
-import { RootReducerState } from './../reducers/index';
+import { RootReducerState, getProjectLoading, getProjectLoaded } from './../reducers/index';
 import { ProjectsListRequestedAction, ProjectsListSuccessAction } from './../actions/projects-action';
+import { getProjects } from './../reducers/index';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
@@ -50,17 +52,36 @@ export class ProjectsComponent implements OnInit {
 
   getProjectsData() {
 
-    this.store.dispatch(new ProjectsListRequestedAction());
+    const loading = this.store.select(getProjectLoading);
+    const loaded = this.store.select(getProjectLoaded);
+    const getProjectData = this.store.select(getProjects);
+    const loadedAndLoadingObs = combineLatest([loaded, loading])
 
-    this.service.getProjects()
-      .subscribe(
-        (response) => {
-          this.projects = response;
-          this.store.dispatch(new ProjectsListSuccessAction({ data: response }))
-          console.log(this.projects)
-          this.showLoading = false;
+    loadedAndLoadingObs.subscribe(
+      (data) => {
+        if (!data[0] && !data[1]) {
+
+          this.store.dispatch(new ProjectsListRequestedAction());
+
+          this.service.getProjects()
+            .subscribe(
+              (response) => {
+                this.projects = response;
+                this.store.dispatch(new ProjectsListSuccessAction({ data: response }))
+                console.log(this.projects)
+                this.showLoading = false;
+              }
+            )
         }
-      )
+      }
+    );
+
+    getProjectData.subscribe((data) => {
+      this.projects = data;
+      this.showLoading = false;
+
+    })
+
   }
 
   getClientLocationsData() {
