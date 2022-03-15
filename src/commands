@@ -20,3 +20,5 @@ npm install @angular/animations --save
 // For Redux ngrx store 
 
 ng add @ngrx/store@12.2.0
+
+npm install @ngrx/store-devtools@12.2.0

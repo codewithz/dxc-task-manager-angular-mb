@@ -8,6 +8,8 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { rootReducer } from './reducers';
 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -61,6 +63,7 @@ import { ProjectComponent } from './project/project.component';
       preventDuplicates: true
     }), // ToastrModule added
     StoreModule.forRoot(rootReducer),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     {
