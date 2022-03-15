@@ -16,7 +16,7 @@ const initialState: ProjectReducerState = {
     projects: []
 }
 
-export function userReducer(state = initialState, action: Action) {
+export function projectReducer(state = initialState, action: Action) {
     switch (action.type) {
         case projectAction.PROJECTS_LIST_REQUESTED: {
             return { ...state, loading: true }
