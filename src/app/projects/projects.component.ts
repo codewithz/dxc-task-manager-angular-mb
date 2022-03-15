@@ -12,6 +12,7 @@ import { RootReducerState, getProjectLoading, getProjectLoaded } from './../redu
 import { ProjectsListRequestedAction, ProjectsListSuccessAction } from './../actions/projects-action';
 import { getProjects } from './../reducers/index';
 import { combineLatest } from 'rxjs';
+import { ProjectsRepositoryService } from './projects-repository.service';
 
 @Component({
   selector: 'app-projects',
@@ -40,7 +41,7 @@ export class ProjectsComponent implements OnInit {
   constructor(private service: ProjectsService,
     private clientLocationService: ClientLocationsService,
     private toaster: ToastrService,
-    private store: Store<RootReducerState>
+    private projectRepository: ProjectsRepositoryService
   ) { }
 
   ngOnInit(): void {
@@ -52,31 +53,9 @@ export class ProjectsComponent implements OnInit {
 
   getProjectsData() {
 
-    const loading = this.store.select(getProjectLoading);
-    const loaded = this.store.select(getProjectLoaded);
-    const getProjectData = this.store.select(getProjects);
-    const loadedAndLoadingObs = combineLatest([loaded, loading])
 
-    loadedAndLoadingObs.subscribe(
-      (data) => {
-        if (!data[0] && !data[1]) {
-
-          this.store.dispatch(new ProjectsListRequestedAction());
-
-          this.service.getProjects()
-            .subscribe(
-              (response) => {
-                this.projects = response;
-                this.store.dispatch(new ProjectsListSuccessAction({ data: response }))
-                console.log(this.projects)
-                this.showLoading = false;
-              }
-            )
-        }
-      }
-    );
-
-    getProjectData.subscribe((data) => {
+    const projectData = this.projectRepository.getProjects(true);
+    projectData.subscribe((data) => {
       this.projects = data;
       this.showLoading = false;
 
