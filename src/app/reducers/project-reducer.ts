@@ -29,3 +29,10 @@ export function projectReducer(state = initialState, action: Action) {
             return state;
     }
 }
+
+
+// Selectors : Are like observable which helps us to listen to a change in specific slice of a state
+
+export const getLoading = (state: ProjectReducerState) => state.loading;
+export const getLoaded = (state: ProjectReducerState) => state.loaded;
+export const getProjects = (state: ProjectReducerState) => state.projects;
