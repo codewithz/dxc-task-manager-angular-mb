@@ -6,6 +6,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+import { rootReducer } from './reducers';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,7 +60,7 @@ import { ProjectComponent } from './project/project.component';
       positionClass: 'toast-top-right',
       preventDuplicates: true
     }), // ToastrModule added
-    StoreModule.forRoot({}, {}), 
+    StoreModule.forRoot(rootReducer),
   ],
   providers: [
     {
