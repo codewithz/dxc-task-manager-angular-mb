@@ -16,3 +16,7 @@ npm install -D @types/jquery
 npm install ngx-toastr --save
 
 npm install @angular/animations --save
+
+// For Redux ngrx store 
+
+ng add @ngrx/store@12.2.0
