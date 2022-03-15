@@ -21,6 +21,7 @@ import { ClientLocationStatusValidatorDirective } from './directives/client-loca
 import { ProjectIdUniqueValidatorDirective } from './directives/project-id-unique-validator.directive';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { StoreModule } from '@ngrx/store';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { StoreModule } from '@ngrx/store';
     TeamSizeValidatorDirective,
     ClientLocationStatusValidatorDirective,
     ProjectIdUniqueValidatorDirective,
-    SignUpComponent
+    SignUpComponent,
+    ProjectComponent
   ],
   imports: [
 
