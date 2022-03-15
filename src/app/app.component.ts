@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login/login.service';
+import { ProjectsRepositoryService } from './projects/projects-repository.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,10 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   title = 'task-manager';
+  projectCount = 0;
 
-  constructor(public loginService: LoginService) { }
+  constructor(public loginService: LoginService,
+    private projectRepository: ProjectsRepositoryService) { }
+
+
 }

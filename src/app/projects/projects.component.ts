@@ -54,7 +54,7 @@ export class ProjectsComponent implements OnInit {
   getProjectsData() {
 
 
-    const projectData = this.projectRepository.getProjects(true);
+    const projectData = this.projectRepository.getProjects();
     projectData.subscribe((data) => {
       this.projects = data;
       this.showLoading = false;
