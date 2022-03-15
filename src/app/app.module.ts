@@ -20,6 +20,7 @@ import { TeamSizeValidatorDirective } from './directives/team-size-validator.dir
 import { ClientLocationStatusValidatorDirective } from './directives/client-location-status-validator.directive';
 import { ProjectIdUniqueValidatorDirective } from './directives/project-id-unique-validator.directive';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
       positionClass: 'toast-top-right',
       preventDuplicates: true
     }), // ToastrModule added
+    StoreModule.forRoot({}, {}), 
   ],
   providers: [
     {
